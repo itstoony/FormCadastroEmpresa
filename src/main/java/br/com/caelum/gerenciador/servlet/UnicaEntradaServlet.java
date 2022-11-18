@@ -1,11 +1,13 @@
 package br.com.caelum.gerenciador.servlet;
 
-import br.com.caelum.gerenciador.acao.*;
-import com.sun.net.httpserver.HttpExchange;
+import br.com.caelum.gerenciador.acao.Acao;
 
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/entrada")
@@ -16,13 +18,13 @@ public class UnicaEntradaServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String paramAcao = req.getParameter("acao");
-        HttpSession sessao = req.getSession();
-        boolean usuarioDeslogado = (sessao.getAttribute("usuarioLogado") == null);
-        boolean nãoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
-        if ( nãoProtegida && usuarioDeslogado){
-            resp.sendRedirect("entrada?acao=LoginForm");
-            return;
-        }
+//        HttpSession sessao = req.getSession();
+//        boolean usuarioDeslogado = (sessao.getAttribute("usuarioLogado") == null);
+//        boolean nãoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
+//        if ( nãoProtegida && usuarioDeslogado){
+//            resp.sendRedirect("entrada?acao=LoginForm");
+//            return;
+//        }
 
 
 
