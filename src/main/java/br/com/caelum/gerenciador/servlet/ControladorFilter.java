@@ -2,31 +2,22 @@ package br.com.caelum.gerenciador.servlet;
 
 import br.com.caelum.gerenciador.acao.Acao;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebServlet("/entrada")
-public class UnicaEntradaServlet extends HttpServlet {
-    //Central controller -- Controla o fluxo
-
+@WebFilter(urlPatterns = "/entrada")
+public class ControladorFilter implements Filter {
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
+        System.out.println("Chamando controlador");
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
         String paramAcao = req.getParameter("acao");
-//        HttpSession sessao = req.getSession();
-//        boolean usuarioDeslogado = (sessao.getAttribute("usuarioLogado") == null);
-//        boolean nãoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
-//        if ( nãoProtegida && usuarioDeslogado){
-//            resp.sendRedirect("entrada?acao=LoginForm");
-//            return;
-//        }
-
-
-
 
         String nomeDaClasse = "br.com.caelum.gerenciador.acao." + paramAcao;
         String nome;
@@ -47,6 +38,5 @@ public class UnicaEntradaServlet extends HttpServlet {
         } else {
             resp.sendRedirect( tipoEEndereco[1]);
         }
-
     }
 }
